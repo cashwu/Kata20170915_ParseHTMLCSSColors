@@ -36,6 +36,12 @@ namespace Kata20170915_ParseHTMLCSSColors
             ColorParserShouldbe(new RGB(17, 17, 17), "#111");
         }
 
+        [TestMethod]
+        public void input_FFF_should_return_255_255_255()
+        {
+            ColorParserShouldbe(new RGB(255, 255, 255), "#FFF");
+        }
+
         private static void ColorParserShouldbe(RGB expected, string color)
         {
             var parser = new HtmlColorParser();
