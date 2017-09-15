@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -43,6 +44,12 @@ namespace Kata20170915_ParseHTMLCSSColors
             ColorParserShouldbe(new RGB(255, 255, 255), "#FFF");
         }
 
+        [TestMethod]
+        public void input_LimeGreen_should_return_50_205_50()
+        {
+            ColorParserShouldbe(new RGB(50, 205, 50), "LimeGreen");
+        }
+
         private static void ColorParserShouldbe(RGB expected, string color)
         {
             var parser = new HtmlColorParser();
@@ -55,22 +62,29 @@ namespace Kata20170915_ParseHTMLCSSColors
 
     public class HtmlColorParser
     {
+        private readonly IDictionary<string, string> presetColors;
+
+        public HtmlColorParser()
+        {
+            this.presetColors = new Dictionary<string, string>
+            {
+                {"limegreen", "#32CD32"}
+            };
+        }
+
         public RGB Parse(string color)
         {
-            if (color.StartsWith("#"))
-            {
-                var rString = color.Length == 7 ? color.Substring(1, 2) : new string(color[1], 2);
-                var gString = color.Length == 7 ? color.Substring(3, 2) : new string(color[2], 2);
-                var bString = color.Length == 7 ? color.Substring(5, 2) : new string(color[3], 2);
+            color = color.StartsWith("#") ? color : presetColors[color.ToLower()];
 
-                var r = Convert.ToByte(rString, 16);
-                var g = Convert.ToByte(gString, 16);
-                var b = Convert.ToByte(bString, 16);
+            var rString = color.Length == 7 ? color.Substring(1, 2) : new string(color[1], 2);
+            var gString = color.Length == 7 ? color.Substring(3, 2) : new string(color[2], 2);
+            var bString = color.Length == 7 ? color.Substring(5, 2) : new string(color[3], 2);
 
-                return new RGB(r, g, b);
-            }
+            var r = Convert.ToByte(rString, 16);
+            var g = Convert.ToByte(gString, 16);
+            var b = Convert.ToByte(bString, 16);
 
-            return new RGB(0, 0, 0);
+            return new RGB(r, g, b);
         }
     }
 
