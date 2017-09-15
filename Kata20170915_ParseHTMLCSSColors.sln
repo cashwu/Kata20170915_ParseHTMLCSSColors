@@ -22,4 +22,7 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE03E706-AFF7-4391-A800-6615735835BC}
 	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = fee7f738-038b-485c-86e7-c84ef3ff803e
+	EndGlobalSection
 EndGlobal
