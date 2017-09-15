@@ -13,7 +13,7 @@ namespace Kata20170915_ParseHTMLCSSColors
         }
 
         [TestMethod]
-        public void input_010101_should_return_0_0_0()
+        public void input_010101_should_return_1_1_1()
         {
             ColorParserShouldbe(new RGB(1, 1, 1), "#010101");
         }
@@ -28,6 +28,12 @@ namespace Kata20170915_ParseHTMLCSSColors
         public void input_FFFFFF_should_return_255_255_255()
         {
             ColorParserShouldbe(new RGB(255, 255, 255), "#FFFFFF");
+        }
+
+        [TestMethod]
+        public void input_111_should_return_1_1_1()
+        {
+            ColorParserShouldbe(new RGB(1, 1, 1), "#111");
         }
 
         private static void ColorParserShouldbe(RGB expected, string color)
@@ -46,9 +52,21 @@ namespace Kata20170915_ParseHTMLCSSColors
         {
             if (color.StartsWith("#"))
             {
-                var r = Convert.ToByte(color.Substring(1, 2), 16);
-                var g = Convert.ToByte(color.Substring(3, 2), 16);
-                var b = Convert.ToByte(color.Substring(5, 2), 16);
+                byte r;
+                byte g;
+                byte b;
+                if (color.Length == 7)
+                {
+                    r = Convert.ToByte(color.Substring(1, 2), 16);
+                    g = Convert.ToByte(color.Substring(3, 2), 16);
+                    b = Convert.ToByte(color.Substring(5, 2), 16);
+
+                    return new RGB(r, g, b);
+                }
+
+                r = Convert.ToByte(color.Substring(1, 1), 16);
+                g = Convert.ToByte(color.Substring(2, 1), 16);
+                b = Convert.ToByte(color.Substring(3, 1), 16);
 
                 return new RGB(r, g, b);
             }
