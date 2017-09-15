@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170915_ParseHTMLCSSColors
@@ -58,21 +59,13 @@ namespace Kata20170915_ParseHTMLCSSColors
         {
             if (color.StartsWith("#"))
             {
-                byte r;
-                byte g;
-                byte b;
-                if (color.Length == 7)
-                {
-                    r = Convert.ToByte(color.Substring(1, 2), 16);
-                    g = Convert.ToByte(color.Substring(3, 2), 16);
-                    b = Convert.ToByte(color.Substring(5, 2), 16);
+                var rString = color.Length == 7 ? color.Substring(1, 2) : new string(color[1], 2);
+                var gString = color.Length == 7 ? color.Substring(3, 2) : new string(color[2], 2);
+                var bString = color.Length == 7 ? color.Substring(5, 2) : new string(color[3], 2);
 
-                    return new RGB(r, g, b);
-                }
-
-                r = Convert.ToByte(new string(color[1], 2), 16);
-                g = Convert.ToByte(new string(color[2], 2), 16);
-                b = Convert.ToByte(new string(color[3], 2), 16);
+                var r = Convert.ToByte(rString, 16);
+                var g = Convert.ToByte(gString, 16);
+                var b = Convert.ToByte(bString, 16);
 
                 return new RGB(r, g, b);
             }
