@@ -9,9 +9,13 @@ namespace Kata20170915_ParseHTMLCSSColors
         [TestMethod]
         public void input_000000_should_return_0_0_0()
         {
+            ColorParserShouldbe(new RGB(0, 0, 0), "#000000");
+        }
+
+        private static void ColorParserShouldbe(RGB expected, string color)
+        {
             var parser = new HtmlColorParser();
-            var actual = parser.Parse("#000000");
-            var expected = new RGB(0, 0, 0);
+            var actual = parser.Parse(color);
             Assert.AreEqual(expected.r, actual.r);
             Assert.AreEqual(expected.g, actual.g);
             Assert.AreEqual(expected.b, actual.b);
