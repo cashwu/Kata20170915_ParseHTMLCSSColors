@@ -31,9 +31,9 @@ namespace Kata20170915_ParseHTMLCSSColors
         }
 
         [TestMethod]
-        public void input_111_should_return_1_1_1()
+        public void input_111_should_return_17_17_17()
         {
-            ColorParserShouldbe(new RGB(1, 1, 1), "#111");
+            ColorParserShouldbe(new RGB(17, 17, 17), "#111");
         }
 
         private static void ColorParserShouldbe(RGB expected, string color)
@@ -64,9 +64,9 @@ namespace Kata20170915_ParseHTMLCSSColors
                     return new RGB(r, g, b);
                 }
 
-                r = Convert.ToByte(color.Substring(1, 1), 16);
-                g = Convert.ToByte(color.Substring(2, 1), 16);
-                b = Convert.ToByte(color.Substring(3, 1), 16);
+                r = Convert.ToByte(new string(color[1], 2), 16);
+                g = Convert.ToByte(new string(color[2], 2), 16);
+                b = Convert.ToByte(new string(color[3], 2), 16);
 
                 return new RGB(r, g, b);
             }
